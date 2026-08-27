@@ -5,7 +5,7 @@ import DashboardPage from "../pages/DashboardPage";
 import InterviewsPage from "../features/interviews/InterviewsPage";
 import InterviewPreparePage from "../features/interviews/InterviewPreparePage";
 import InterviewSessionPage from "../features/interviews/InterviewSessionPage";
-
+import SettingsPage from "../pages/SettingsPage";
 
 
 const ProtectedRoute = ({ children }) => {
@@ -39,6 +39,10 @@ export default function AppRoutes() {
 
       <Route path="/interviews/:id/session" element={<ProtectedRoute>
         <InterviewSessionPage />
+      </ProtectedRoute>} />
+
+      <Route path="/settings/*" element={<ProtectedRoute>
+        <SettingsPage />
       </ProtectedRoute>} />
 
       <Route path="/start-interview" element={<Navigate to="/interviews" replace />} />
