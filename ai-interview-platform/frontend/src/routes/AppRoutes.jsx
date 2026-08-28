@@ -6,10 +6,11 @@ import InterviewsPage from "../features/interviews/InterviewsPage";
 import InterviewPreparePage from "../features/interviews/InterviewPreparePage";
 import InterviewSessionPage from "../features/interviews/InterviewSessionPage";
 import SettingsPage from "../pages/SettingsPage";
-
-
+import InterviewHistoryPage from "../pages/InterviewHistoryPage";
+import InterviewResultDetailsPage from "../pages/InterviewResultDetailsPage";
 const ProtectedRoute = ({ children }) => {
   const token = useSelector((state) => state.auth.token);
+  console.log("ProtectedRoute token:", token);
   return token ? children : <Navigate to="/login" replace />;
 };
 
@@ -41,11 +42,32 @@ export default function AppRoutes() {
         <InterviewSessionPage />
       </ProtectedRoute>} />
 
+      {/* SETTINGS */}
       <Route path="/settings/*" element={<ProtectedRoute>
         <SettingsPage />
       </ProtectedRoute>} />
 
+      {/* INTERVIEW */}
       <Route path="/start-interview" element={<Navigate to="/interviews" replace />} />
+        
+      <Route
+  path="/history"
+  element={
+    <ProtectedRoute>
+      <InterviewHistoryPage />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/history/:id"
+  element={
+    <ProtectedRoute>
+      <InterviewResultDetailsPage />
+    </ProtectedRoute>
+  }
+/>
+
 
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
