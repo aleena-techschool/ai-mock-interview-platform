@@ -1,12 +1,23 @@
 
 import { useNavigate } from "react-router-dom";
 
-export default function InterviewResultHeader({ interview }) {
+export default function InterviewResultHeader({
+  interview,
+  activeTab,
+  setActiveTab,
+}) {
   const navigate = useNavigate();
 
   const marksGained = interview?.score?.marksGained ?? 0;
   const maxMarks = interview?.score?.maxMarks ?? 0;
   const percentage = interview?.score?.percentage ?? 0;
+
+  const tabs = [
+    "Overview",
+    "Questions",
+    // "Performance",
+    "Feedback",
+  ];
 
   return (
     <>
@@ -32,7 +43,7 @@ export default function InterviewResultHeader({ interview }) {
         Back to Interview History
       </button>
 
-      {/* Interview Header */}
+      {/* Interview Header  div with interview details*/}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-5">
         <div className="flex items-center justify-between">
 
@@ -63,31 +74,24 @@ export default function InterviewResultHeader({ interview }) {
               </h1>
 
               <div className="flex items-center gap-3 mt-2">
-
                 <span className="text-xs text-gray-500">
                   {interview.type}
                 </span>
 
-                <span className="text-gray-300">
-                  •
-                </span>
+                <span className="text-gray-300">•</span>
 
                 <span className="text-xs text-gray-500">
                   {interview.mode}
                 </span>
 
-                <span className="text-gray-300">
-                  •
-                </span>
+                <span className="text-gray-300">•</span>
 
                 <span className="text-xs font-semibold px-2 py-1 rounded-full bg-yellow-50 text-yellow-600">
                   {interview.difficulty}
                 </span>
-
               </div>
 
               <div className="flex items-center gap-4 mt-3 text-xs text-gray-400">
-
                 <span>
                   📅 {formatDate(interview.scheduledDate)}
                 </span>
@@ -99,7 +103,6 @@ export default function InterviewResultHeader({ interview }) {
                 <span>
                   ⏱ {interview.duration} min
                 </span>
-
               </div>
             </div>
           </div>
@@ -108,13 +111,10 @@ export default function InterviewResultHeader({ interview }) {
           <div className="flex items-center gap-5">
 
             <div className="relative w-24 h-24">
-
               <svg
                 className="w-24 h-24 -rotate-90"
                 viewBox="0 0 100 100"
               >
-
-                {/* Background */}
                 <circle
                   cx="50"
                   cy="50"
@@ -124,7 +124,6 @@ export default function InterviewResultHeader({ interview }) {
                   fill="none"
                 />
 
-                {/* Progress */}
                 <circle
                   cx="50"
                   cy="50"
@@ -138,20 +137,16 @@ export default function InterviewResultHeader({ interview }) {
                     251.2 - (251.2 * percentage) / 100
                   }
                 />
-
               </svg>
 
               <div className="absolute inset-0 flex items-center justify-center">
-
                 <span className="text-xl font-bold text-gray-800">
                   {percentage}%
                 </span>
-
               </div>
             </div>
 
             <div>
-
               <p className="text-xl font-bold text-green-600">
                 {marksGained} / {maxMarks}
               </p>
@@ -165,44 +160,39 @@ export default function InterviewResultHeader({ interview }) {
                   ? "Good Performance"
                   : "Needs Improvement"}
               </p>
-
             </div>
           </div>
-
         </div>
       </div>
 
-      {/* Tabs */}
+      {/* Tabs : overview,questions,feedback*/}
       <div className="bg-white rounded-t-2xl border border-gray-100 border-b-0">
-
         <div className="flex items-center gap-8 px-6">
 
-          <button className="py-4 text-sm font-semibold text-green-600 border-b-2 border-green-500">
-            Overview
-          </button>
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab;
 
-          <button className="py-4 text-sm text-gray-500 hover:text-gray-800">
-            Questions
-          </button>
-
-          <button className="py-4 text-sm text-gray-500 hover:text-gray-800">
-            Performance
-          </button>
-
-          <button className="py-4 text-sm text-gray-500 hover:text-gray-800">
-            Feedback
-          </button>
-{/* 
-          <button className="py-4 text-sm text-gray-500 hover:text-gray-800">
-            Recording
-          </button> */}
+            return (
+              <button
+                key={tab}
+                type="button"
+                onClick={() => setActiveTab(tab)}
+                className={`py-4 text-sm font-semibold transition-colors ${
+                  isActive
+                    ? "text-green-600 border-b-2 border-green-500"
+                    : "text-gray-500 hover:text-gray-800"
+                }`}
+              >
+                {tab}
+              </button>
+            );
+          })}
 
         </div>
       </div>
     </>
   );
 }
-
 
 /* Date Formatter */
 function formatDate(date) {

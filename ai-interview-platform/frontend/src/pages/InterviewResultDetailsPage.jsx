@@ -1,4 +1,5 @@
 
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import Sidebar from "../features/dashboard/Sidebar";
@@ -9,11 +10,13 @@ import { interviewResults } from "../mock/interviewResultData";
 import InterviewResultHeader from "../features/interviews/interviewHistory/InterviewResultHeader";
 import InterviewResultDetails from "../features/interviews/interviewHistory/InterviewResultDetails";
 import PerformanceSummary from "../features/interviews/interviewHistory/PerformanceSummary";
-import InterviewDetails from "../features/interviews/interviewHistory/InterviewDetails";
+import InterviewQusetionAnswer from "../features/interviews/interviewHistory/InterviewQuestionAnswer";
 
 export default function InterviewResultDetailsPage() {
-
   const { id } = useParams();
+
+  // Active tab
+  const [activeTab, setActiveTab] = useState("Overview");
 
   const interview = interviewResults.find(
     (item) => String(item.id) === String(id)
@@ -23,17 +26,13 @@ export default function InterviewResultDetailsPage() {
   if (!interview) {
     return (
       <div className="flex h-screen overflow-hidden bg-gray-50">
-
         <Sidebar />
 
         <div className="flex-1 flex flex-col overflow-hidden">
-
           <TopBar />
 
           <main className="flex-1 flex items-center justify-center">
-
             <div className="text-center">
-
               <h2 className="text-lg font-semibold text-gray-800">
                 Interview not found
               </h2>
@@ -41,11 +40,8 @@ export default function InterviewResultDetailsPage() {
               <p className="text-sm text-gray-400 mt-1">
                 The selected interview could not be found.
               </p>
-
             </div>
-
           </main>
-
         </div>
       </div>
     );
@@ -59,59 +55,50 @@ export default function InterviewResultDetailsPage() {
           "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 40%, #ffffff 100%)",
       }}
     >
-
       {/* Sidebar */}
       <Sidebar />
 
       {/* Main */}
       <div className="flex-1 flex flex-col overflow-hidden">
-
         <TopBar />
 
         <main className="flex-1 overflow-y-auto px-6 py-5">
 
-          {/* ==================================
-              INTERVIEW HEADER
-          ================================== */}
-
+          {/* Header + Tabs */}
           <InterviewResultHeader
             interview={interview}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
           />
 
-
           {/* ==================================
-              PERFORMANCE + DETAILS
+              TAB CONTENT
           ================================== */}
 
-          <div className="bg-white border border-gray-100 p-6">
-
-            <div className="grid grid-cols-3 gap-5">
-
-              <PerformanceSummary
-                interview={interview}
-              />
-
-              <InterviewDetails
-                interview={interview}
-              />
-
+          {activeTab === "Overview" && (
+            <div className="bg-white border border-gray-100 p-6">
+              <PerformanceSummary interview={interview} />
             </div>
+          )}
 
-          </div>
+          {activeTab === "Questions" && (
+            <div className="bg-white border border-gray-100 p-6">
+              <InterviewQusetionAnswer interview={interview} />
+            </div>
+          )}
+{/* 
+          {activeTab === "Performance" && (
+            <div className="bg-white border border-gray-100 p-6">
+              <PerformanceSummary interview={interview} />
+            </div>
+          )} */}
 
-
-          {/* ==================================
-              STRENGTHS / FEEDBACK
-          ================================== */}
-
-          <InterviewResultDetails
-            interview={interview}
-          />
+          {activeTab === "Feedback" && (
+            <InterviewResultDetails interview={interview} />
+          )}
 
         </main>
-
       </div>
-
     </div>
   );
 }

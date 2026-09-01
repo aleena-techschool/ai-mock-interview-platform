@@ -63,7 +63,7 @@ export default function InterviewResultDetails({ interview }) {
           <div className="flex items-start gap-4">
 
             {/* Avatar */}
-            <div className="w-11 h-11 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-bold">
+            <div className="size-11 shrink-0 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-bold">
               TR
             </div>
 
