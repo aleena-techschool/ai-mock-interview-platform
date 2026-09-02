@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 export default function TopBar() {
   const user = useSelector((state) => state.auth.user);
@@ -7,6 +8,10 @@ export default function TopBar() {
 
   const hour = new Date().getHours();
   const greeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
+  //  take currentlocation and check it is dashboard or not
+  const location=useLocation()
+  const showSearch=location.pathname==="/dashboard"
+
 
   return (
     <header
@@ -29,16 +34,17 @@ export default function TopBar() {
 
       {/* Right side */}
       <div className="flex items-center gap-3">
-        {/* Search */}
+        {/* Search only for dashbaord */}
+        {showSearch &&
         <div
-          className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-gray-400"
+          className="hidden sm:flex w-64 items-center gap-2 px-3 py-2 rounded-xl text-sm text-gray-400"
           style={{ background: "#f0fdf4", border: "1px solid rgba(22,163,74,0.15)" }}
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <span>Search...</span>
-        </div>
+        </div>}
 
         {/* Notification */}
         <button
@@ -62,7 +68,7 @@ export default function TopBar() {
           </div>
           <div className="hidden md:block">
             <p className="text-xs font-medium text-gray-700">{name}</p>
-            <p className="text-xs text-gray-400">{studentId}</p>
+            {/* <p className="text-xs text-gray-400">{studentId}</p> */}
           </div>
         </div>
       </div>

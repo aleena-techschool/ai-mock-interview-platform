@@ -15,7 +15,7 @@ export default function PerformanceSummary({ interview }) {
       <div className="border border-gray-100 rounded-xl p-5">
 
         <h2 className="text-sm font-bold text-gray-800 mb-4">
-          Performance Summary
+          Overall Summary
         </h2>
 
         {/* Summary Cards */}

@@ -8,6 +8,10 @@ import InterviewSessionPage from "../features/interviews/InterviewSessionPage";
 import SettingsPage from "../pages/SettingsPage";
 import InterviewHistoryPage from "../pages/InterviewHistoryPage";
 import InterviewResultDetailsPage from "../pages/InterviewResultDetailsPage";
+import QuestionBankPage from "../pages/QuestionBankPage";
+import ResumeAnalyzerPage from "../pages/ResumeAnalyzerPage";
+import RoadmapPage from "../pages/RoadMapPage";
+
 const ProtectedRoute = ({ children }) => {
   const token = useSelector((state) => state.auth.token);
   console.log("ProtectedRoute token:", token);
@@ -68,6 +72,23 @@ export default function AppRoutes() {
   }
 />
 
+
+{/* Resumeanalyzer */}
+<Route   path="/resume"   element={     <ProtectedRoute>
+      <ResumeAnalyzerPage />    </ProtectedRoute>  }/>
+
+
+
+{/* questionbank page */}
+<Route   path="/questions"   element={     <ProtectedRoute>
+      <QuestionBankPage />    </ProtectedRoute>  }/>
+
+
+
+      {/* Roadmap */}
+
+      <Route   path="/roadmap"   element={     <ProtectedRoute>
+      <RoadmapPage />    </ProtectedRoute>  }/>
 
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
