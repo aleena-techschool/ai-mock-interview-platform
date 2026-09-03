@@ -3,6 +3,7 @@ export const studentData = {
     studentId: "STU001",
     name: "Aleena Mathew",
     currentStack: "MERN Stack",
+    
 
     interviewAssignment: {
         difficulty: "Medium",
