@@ -38,7 +38,7 @@ export default function AdminLoginForm() {
                     token: "dummy-token"
                 })
             );
-            navigate("/admindashboard")
+            navigate("/admin/dashboard")
         } else {
             setError("Invalid credentials. Please try again.");
         }
