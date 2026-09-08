@@ -1,3 +1,4 @@
+import { mentors } from "../../../mock/student management/mentorDetails";
 export default function InactiveBatchTable({
     batches,
     selectedBatch,
@@ -52,6 +53,9 @@ export default function InactiveBatchTable({
                             {batches.map((batch) => {
                                 const isSelected =
                                     selectedBatch === batch.batchId;
+                                    const trainer = mentors.find(
+                                                        (mentor) => mentor.employeeId === batch.trainerId
+                                                        );
 
                                 return (
                                     <tr
@@ -108,14 +112,14 @@ export default function InactiveBatchTable({
                                             <div className="flex items-center gap-2.5">
                                                 <div className="h-7 w-7 rounded-full bg-gray-100 flex items-center justify-center">
                                                     <span className="text-[10px] font-semibold text-gray-500">
-                                                        {batch.trainer
+                                                        {trainer.name
                                                             ?.charAt(0)
                                                             ?.toUpperCase()}
                                                     </span>
                                                 </div>
 
                                                 <span className="text-sm text-gray-600">
-                                                    {batch.trainer}
+                                                    {trainer.name}
                                                 </span>
                                             </div>
                                         </td>

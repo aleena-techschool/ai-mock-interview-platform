@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { courseData } from "../../../mock/student management/course";
 import { batchData } from "../../../mock/student management/batch";
 import { dummyUsers } from "../../../mock/authData";
+import { mentors } from "../../../mock/student management/mentorDetails";
 
 import ActiveBatchList from "./ActiveBatchList";
 import InactiveBatchTable from "./InactiveBatchList";

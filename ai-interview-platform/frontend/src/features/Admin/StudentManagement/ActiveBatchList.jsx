@@ -1,3 +1,5 @@
+import { mentors } from "../../../mock/student management/mentorDetails";
+
 
 export default function ActiveBatchList({
     batches,
@@ -25,6 +27,9 @@ export default function ActiveBatchList({
             {batches.map((batch) => {
                 const isSelected = selectedBatch === batch.batchId;
                 const studentCount = getStudentCount(batch.batchId);
+                const trainer = mentors.find(
+                    (mentor) => mentor.employeeId === batch.trainerId
+                    );
 
                 return (
                     <button
@@ -50,9 +55,10 @@ export default function ActiveBatchList({
                             </span>
                         </div>
 
+                       
                         {/* Trainer + Time */}
                         <p className="mt-1 ml-4 text-xs text-gray-400">
-                            {batch.trainer}
+                            {trainer?.name || "Trainer not assigned"}
 
                             <span className="pl-12 text-sm text-green-500">
                                 {batch.time}
