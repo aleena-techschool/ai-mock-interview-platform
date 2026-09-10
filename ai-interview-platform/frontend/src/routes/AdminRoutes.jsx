@@ -7,6 +7,7 @@ import StudentManagePage from "../pages/Admin/StudentManagePage";
 import MentorManagement from "../pages/Admin/MentorManagement";
 import MentorDetails from "../pages/Admin/MentorDetails";
 import PlacementManagement from "../pages/Admin/PlacementManagement";
+import PlacedStudents from "../pages/Admin/PlacedStudents";
 
 
 
@@ -81,6 +82,16 @@ export default function AdminRoutes() {
         element={
           <AdminProtectedRoute>
             <PlacementManagement />
+          </AdminProtectedRoute>
+        }
+      />
+
+       {/* /admin/placement-Batch */}
+      <Route
+        path="/batch/:batchId"
+        element={
+          <AdminProtectedRoute>
+            <PlacedStudents />
           </AdminProtectedRoute>
         }
       />
