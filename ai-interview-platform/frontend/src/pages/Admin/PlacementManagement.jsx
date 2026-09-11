@@ -1,6 +1,6 @@
 import AdminSidebar from "../../features/Admin/Dashboard/Sidebar";
 import AdminTopBar from "../../features/Admin/Dashboard/Topbar";
-// import TrainerCard from "../../features/Admin/PlacementManagement/TrainerCard";
+import TrainerCard from "../../features/Admin/PlacementManagement/TrainerCard";
 import PageHeader from "../../features/Admin/common/PageHeader";
 import TodayDate from "../../features/Admin/common/TodayDate";
 
@@ -35,7 +35,7 @@ export default function PlacementManagement(){
                     <main className=" m-6 flex-1 min-h-0 overflow-y-auto
                         bg-gray-50 pb-8 ">
 
-                            {/* <TrainerCard /> */}
+                            <TrainerCard />
 
 
                     </main>

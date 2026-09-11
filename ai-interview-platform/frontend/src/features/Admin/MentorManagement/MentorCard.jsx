@@ -87,8 +87,7 @@ export default function MentorCard({ mentor }) {
                         {mentor.name}
                     </h3>
 
-                    <p
-                        className="
+                    <p className="
                             mt-0.5 truncate
                             text-xs text-gray-400
                         "
@@ -99,7 +98,6 @@ export default function MentorCard({ mentor }) {
                 </div>
 
             </div>
-
 
             {/* Course */}
             <div className="mt-4">
