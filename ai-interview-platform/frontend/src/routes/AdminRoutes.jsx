@@ -4,6 +4,14 @@ import { useSelector } from "react-redux";
 import AdminLoginPage from "../pages/Admin/AdminLoginPage";
 import AdminDashboardPage from "../pages/Admin/AdminDashboardPage";
 import StudentManagePage from "../pages/Admin/StudentManagePage";
+import MentorManagement from "../pages/Admin/MentorManagement";
+import MentorDetails from "../pages/Admin/MentorDetails";
+import PlacementManagement from "../pages/Admin/PlacementManagement";
+
+
+
+
+
 
 const AdminProtectedRoute = ({ children }) => {
   const token = useSelector((state) => state.auth.token);
@@ -42,6 +50,37 @@ export default function AdminRoutes() {
         element={
           <AdminProtectedRoute>
             <StudentManagePage />
+          </AdminProtectedRoute>
+        }
+      />
+
+
+      {/* admin/studentmanagement */}
+      <Route
+        path="/mentor-management"
+        element={
+          <AdminProtectedRoute>
+            <MentorManagement />
+          </AdminProtectedRoute>
+        }
+      />
+
+      {/* admin/studentmanagement */}
+      <Route
+        path="/mentor-details/:mentorId"
+        element={
+          <AdminProtectedRoute>
+            <MentorDetails />
+          </AdminProtectedRoute>
+        }
+      />
+
+      {/* /admin/placement-management */}
+      <Route
+        path="/placement-management"
+        element={
+          <AdminProtectedRoute>
+            <PlacementManagement />
           </AdminProtectedRoute>
         }
       />
