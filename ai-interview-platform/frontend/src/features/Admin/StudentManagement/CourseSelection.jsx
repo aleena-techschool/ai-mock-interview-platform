@@ -72,7 +72,7 @@ export default function CourseSelection({ onBatchSelect }) {
                                     whitespace-nowrap transition-colors
                                     ${
                                         isSelected
-                                            ? "text-emerald-600"
+                                            ? "text-blue-600"
                                             : "text-gray-600 hover:text-gray-900"
                                     }
                                 `}
@@ -83,7 +83,7 @@ export default function CourseSelection({ onBatchSelect }) {
                                     <span
                                         className="
                                             absolute left-0 right-0 bottom-0
-                                            h-0.5 bg-emerald-500 rounded-full
+                                            h-0.5 bg-blue-500 rounded-full
                                         "
                                     />
                                 )}

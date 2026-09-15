@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate} from "react-router-dom"
+import { useNavigate,useLocation} from "react-router-dom"
 import { dummyUsers } from "../../../mock/authData";
 import { batchData } from "../../../mock/student management/batch";
 
@@ -9,6 +9,12 @@ export default function PlacementBatch({ trainer }) {
 
   // Inactive selected by default
   const [batchStatus, setBatchStatus] = useState("Inactive");
+   
+
+  const location=useLocation()
+  const isReport=location.pathname==="/admin/placement-report"
+  
+
 
 //  active batch
   const activeBatches = batchData
@@ -90,6 +96,95 @@ export default function PlacementBatch({ trainer }) {
       ? activeBatches
       : inactiveBatches;
 
+
+
+  // handleexport function
+
+  const handleExport = () => {
+
+    // Get the currently selected tab's batches
+    const batchesToExport = displayedBatches;
+
+    // CSV headers
+    const headers = [
+      "Placement Trainer",
+      "Batch ID",
+      "Batch Name",
+      "Batch Time",
+      "Batch Status",
+      "Total Students",
+      "Placed Students",
+      "Not Placed Students",
+      "Placement Rate"
+    ];
+
+    // Convert batch data into CSV rows
+    const rows = batchesToExport.map((batch) => [
+      trainer.name,
+      batch.batchId,
+      batch.name,
+      batch.time,
+      batch.status,
+      batch.totalStudents,
+      batch.placedStudents,
+      batch.notPlacedStudents,
+      `${batch.placementRate}%`
+    ]);
+
+    // If there are no batches
+    if (rows.length === 0) {
+      alert(`No ${batchStatus.toLowerCase()} batches available to export.`);
+      return;
+    }
+
+    // Combine headers and rows
+    const csvData = [
+      headers,
+      ...rows
+    ];
+
+    // Convert data into CSV string
+    const csvContent = csvData
+      .map((row) =>
+        row
+          .map((value) => `"${value ?? ""}"`)
+          .join(",")
+      )
+      .join("\n");
+
+    // Create CSV file
+    const blob = new Blob(
+      [csvContent],
+      {
+        type: "text/csv;charset=utf-8;"
+      }
+    );
+
+    // Create temporary URL
+    const url = URL.createObjectURL(blob);
+
+    // Create download link
+    const link = document.createElement("a");
+
+    link.href = url;
+
+    // Example:
+    // Aleena_Active_Placement_Report.csv
+    link.download =
+      `${trainer.name}_${batchStatus}_Placement_Report.csv`;
+
+    document.body.appendChild(link);
+
+    // Start download
+    link.click();
+
+    // Cleanup
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+
+
   return (
     <div className="mt-5 rounded-xl border border-gray-200 bg-white shadow-sm">
 
@@ -105,6 +200,9 @@ export default function PlacementBatch({ trainer }) {
             View placement statistics for assigned batches
           </p>
         </div>
+
+       
+        
 
         {/* Active / Inactive Toggle */}
         <div className="flex rounded-lg bg-gray-100 p-1">
@@ -150,6 +248,48 @@ export default function PlacementBatch({ trainer }) {
           </button>
 
         </div>
+
+
+         {/* buttn for export only if it is report page */}
+        {isReport &&
+        <div>
+          <button
+                                onClick={handleExport}
+                                className="
+                                  inline-flex items-center justify-center gap-2
+                                  h-10 px-4
+                                  rounded-lg
+                                  border border-gray-200
+                                  bg-white
+                                  text-sm font-medium text-gray-700
+                                  shadow-sm
+                                  transition-all
+                                  hover:bg-gray-50
+                                  hover:border-gray-300
+                                  focus:outline-none
+                                  focus:ring-2
+                                  focus:ring-emerald-100
+                                "
+                                >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth="1.8"
+                                  stroke="currentColor"
+                                  className="w-4 h-4"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"
+                                  />
+                                </svg>
+
+                                Export 
+                               </button>
+        </div>
+        }
 
       </div>
 
