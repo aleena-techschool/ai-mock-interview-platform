@@ -138,6 +138,16 @@ export default function AdminRoutes() {
       />
 
 
+      <Route
+        path="/report/:batchId"
+        element={
+          <AdminProtectedRoute>
+            <PlacedStudents />
+          </AdminProtectedRoute>
+        }
+      />
+
+
       {/* Unknown admin route */}
       <Route
         path="*"

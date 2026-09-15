@@ -74,7 +74,7 @@ const reportData = [
     content: [
       "View placed students",
       "View not placed students",
-      "Filter by batch",
+      "Filter by mentor",
       "Export placement data",
     ],
     theme: "green",
@@ -86,9 +86,9 @@ const reportData = [
     title: "Complete Platform Data",
     description: "Export complete platform-related information.",
     content: [
-      "View complete student data",
-      "View mentor and batch data",
-      "View placement information",
+      "Get placed student data",
+      "Get active and inactive mentor data",
+      "Get active and inactive batch data",
       "Export complete platform data",
     ],
     theme: "orange",

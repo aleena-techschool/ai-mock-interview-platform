@@ -6,6 +6,7 @@ import PlacementBatch from "./PlacementBatch";
 
 
 import { useLocation } from "react-router-dom";
+
 export default function TrainerCard() {
   const [selectedStatus, setSelectedStatus] = useState("Active");
   const [search, setSearch] = useState("");

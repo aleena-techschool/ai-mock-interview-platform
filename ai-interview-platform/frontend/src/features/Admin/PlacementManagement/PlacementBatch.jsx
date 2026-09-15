@@ -98,92 +98,130 @@ export default function PlacementBatch({ trainer }) {
 
 
 
-  // handleexport function
 
-  const handleExport = () => {
 
-    // Get the currently selected tab's batches
-    const batchesToExport = displayedBatches;
+  //  functions for exporting 
 
-    // CSV headers
-    const headers = [
-      "Placement Trainer",
-      "Batch ID",
-      "Batch Name",
-      "Batch Time",
-      "Batch Status",
-      "Total Students",
-      "Placed Students",
-      "Not Placed Students",
-      "Placement Rate"
-    ];
+      const exportToCSV = (headers, rows, fileName) => {
+      const csvData = [
+        headers,
+        ...rows
+      ];
 
-    // Convert batch data into CSV rows
-    const rows = batchesToExport.map((batch) => [
-      trainer.name,
-      batch.batchId,
-      batch.name,
-      batch.time,
-      batch.status,
-      batch.totalStudents,
-      batch.placedStudents,
-      batch.notPlacedStudents,
-      `${batch.placementRate}%`
-    ]);
+      const csvContent = csvData
+        .map((row) =>
+          row
+            .map((value) =>
+              `"${String(value ?? "").replace(/"/g, '""')}"`
+            )
+            .join(",")
+        )
+        .join("\n");
 
-    // If there are no batches
-    if (rows.length === 0) {
-      alert(`No ${batchStatus.toLowerCase()} batches available to export.`);
-      return;
-    }
+      const blob = new Blob(
+        [csvContent],
+        {
+          type: "text/csv;charset=utf-8;"
+        }
+      );
 
-    // Combine headers and rows
-    const csvData = [
-      headers,
-      ...rows
-    ];
+      const url = URL.createObjectURL(blob);
 
-    // Convert data into CSV string
-    const csvContent = csvData
-      .map((row) =>
-        row
-          .map((value) => `"${value ?? ""}"`)
-          .join(",")
-      )
-      .join("\n");
+      const link = document.createElement("a");
 
-    // Create CSV file
-    const blob = new Blob(
-      [csvContent],
-      {
-        type: "text/csv;charset=utf-8;"
+      link.href = url;
+      link.download = fileName;
+
+      document.body.appendChild(link);
+      link.click();
+
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    };
+
+    const handleFullExport = () => {
+
+      const batchesToExport = displayedBatches;
+
+      if (batchesToExport.length === 0) {
+        alert(`No ${batchStatus.toLowerCase()} batches available to export.`);
+        return;
       }
-    );
 
-    // Create temporary URL
-    const url = URL.createObjectURL(blob);
+      const headers = [
+        "Placement Trainer",
+        "Batch ID",
+        "Batch Name",
+        "Batch Time",
+        "Batch Status",
+        "Total Students",
+        "Placed Students",
+        "Not Placed Students",
+        "Placement Rate"
+      ];
 
-    // Create download link
-    const link = document.createElement("a");
+      const rows = batchesToExport.map((batch) => [
+        trainer.name,
+        batch.batchId,
+        batch.name,
+        batch.time,
+        batch.status,
+        batch.totalStudents,
+        batch.placedStudents,
+        batch.notPlacedStudents,
+        `${batch.placementRate}%`
+      ]);
 
-    link.href = url;
+      exportToCSV(
+        headers,
+        rows,
+        `${trainer.name}_${batchStatus}_Placement_Report.csv`
+      );
+    };
 
-    // Example:
-    // Aleena_Active_Placement_Report.csv
-    link.download =
-      `${trainer.name}_${batchStatus}_Placement_Report.csv`;
+    const exportBatchData = (batchId) => {
 
-    document.body.appendChild(link);
+      const studentsToExport = dummyUsers.filter(
+        (student) => student.batchId === batchId
+      );
 
-    // Start download
-    link.click();
+      const batch = batchData.find(
+        (batch) => batch.batchId === batchId
+      );
 
-    // Cleanup
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  };
+      if (studentsToExport.length === 0) {
+        alert("No students found in this batch.");
+        return;
+      }
 
+      const headers = [
+        "Student ID",
+        "Student Name",
+        "Email",
+        "Batch ID",
+        "Batch Name",
+        "Batch Time",
+        "Placement Status",
+        "Placed Date"
+      ];
 
+      const rows = studentsToExport.map((student) => [
+        student.studentId,
+        student.name,
+        student.email,
+        student.batchId,
+        batch?.name || "",
+        batch?.time || "",
+        student.placed ? "Placed" : "Not Placed",
+        student.placedDate || ""
+      ]);
+
+      exportToCSV(
+        headers,
+        rows,
+        `${batch?.name || batchId}_Student_Report.csv`
+      );
+    };
 
   return (
     <div className="mt-5 rounded-xl border border-gray-200 bg-white shadow-sm">
@@ -254,7 +292,7 @@ export default function PlacementBatch({ trainer }) {
         {isReport &&
         <div>
           <button
-                                onClick={handleExport}
+                                onClick={handleFullExport}
                                 className="
                                   inline-flex items-center justify-center gap-2
                                   h-10 px-4
@@ -409,7 +447,7 @@ export default function PlacementBatch({ trainer }) {
 
                   {/* Action */}
                   <td className="px-5 py-4 text-center">
-
+                    {!isReport ?
                     <button
                       type="button"
                       onClick={() =>navigate(`/admin/batch/${b.batchId}`)}
@@ -421,7 +459,21 @@ export default function PlacementBatch({ trainer }) {
                       "
                     >
                       View
+                    </button> :
+
+                    <button
+                      type="button"
+                      onClick={() => exportBatchData(b.batchId)}
+                      className="
+                        rounded-lg px-3 py-1.5
+                        text-xs font-semibold
+                        text-indigo-600
+                        transition hover:bg-indigo-50
+                      "
+                    >
+                      Export
                     </button>
+                      }
 
                   </td>
 
