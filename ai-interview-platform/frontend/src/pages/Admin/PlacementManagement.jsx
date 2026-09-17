@@ -4,7 +4,6 @@ import TrainerCard from "../../features/Admin/PlacementManagement/TrainerCard";
 import PageHeader from "../../features/Admin/common/PageHeader";
 import TodayDate from "../../features/Admin/common/TodayDate";
 
-
 export default function PlacementManagement(){
     return(
             <div className="flex h-screen overflow-hidden">
@@ -16,7 +15,7 @@ export default function PlacementManagement(){
                         <AdminTopBar />
                     </div>
  {/* ----------------------header----------------------- */}
-                    <div className="relative shrink-0">
+                    <div className="relative shrink-0 bg-blue-50">
                     
                         <PageHeader title="Placement Management"
                          description="Track and manage placement activities and placement statistics"
@@ -32,8 +31,8 @@ export default function PlacementManagement(){
 
     {/* ---------------------main contents------------------------- */}
 
-                    <main className=" m-6 flex-1 min-h-0 overflow-y-auto
-                        bg-gray-50 pb-8 ">
+                    <main className=" px-6 pb-6 pt-5 flex-1 min-h-0 overflow-y-auto
+                        bg-gradient-to-br from-sky-50 via-blue-50 to-white pb-8 ">
 
                             <TrainerCard />
 

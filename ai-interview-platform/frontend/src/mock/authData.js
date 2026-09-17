@@ -6,9 +6,9 @@ export const dummyUsers = [
         password: "123456",
         name: "Aleena Mathew",
         role: "student",
-
         batchId: "BATCH004",
-        placed:true
+        placed:true ,
+        placedDate:"03-05-2024"
         
     },
     {
@@ -19,7 +19,8 @@ export const dummyUsers = [
         name: "John Doe",
         role: "student",
         batchId: "BATCH004",
-        placed:true
+        placed:true,
+        placedDate:"03-05-2024"
     },
     {
         id: 3,
@@ -29,7 +30,8 @@ export const dummyUsers = [
         name: "John Doe",
         role: "student",
         batchId: "BATCH004",
-        placed:true
+        placed:true,
+        placedDate:"03-05-2024"
     },
     {
         id: 4,
