@@ -25,7 +25,7 @@ export const batchData = [
     },
     {
         id: 3,
-        courseId: "COURSE001",
+        courseId: "COURSE002",
         batchId: "BATCH003",     
         trainerId:"MTR002",
         name: "Batch 3",
@@ -37,7 +37,7 @@ export const batchData = [
     },
     {
         id:4,
-        courseId: "COURSE001",
+        courseId: "COURSE002",
         batchId: "BATCH004",        
         trainerId:"MTR002",
         name: "Batch 4",
@@ -49,7 +49,7 @@ export const batchData = [
     },
     {
         id: 5,
-        courseId: "COURSE001",
+        courseId: "COURSE003",
         batchId: "BATCH005",    
         trainerId:"MTR003",
         time:"9:30",
@@ -61,7 +61,7 @@ export const batchData = [
     },
     {
         id:6,
-        courseId: "COURSE001",
+        courseId: "COURSE003",
         batchId: "BATCH006",      
         trainerId:"MTR004",
         name: "Batch 6",
