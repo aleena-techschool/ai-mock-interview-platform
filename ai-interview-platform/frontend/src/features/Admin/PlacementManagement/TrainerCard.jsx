@@ -1,7 +1,11 @@
 import { useMemo, useState } from "react";
 import { placement } from "../../../mock/student management/mentorDetails";
 import { batchData } from "../../../mock/student management/batch";
+
 import PlacementBatch from "./PlacementBatch";
+
+
+import { useLocation } from "react-router-dom";
 
 export default function TrainerCard() {
   const [selectedStatus, setSelectedStatus] = useState("Active");
@@ -11,6 +15,8 @@ export default function TrainerCard() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const trainersPerPage = 8;
+
+ 
 
 //  take trainer details
   const trainersWithStats = useMemo(() => {
@@ -92,7 +98,7 @@ export default function TrainerCard() {
   };
 
   return (
-    <div className="w-full space-y-5">
+    <div className="w-full space-y-5 mt-6">
 
          {/* SEARCH and STATUS FILTER */}
      

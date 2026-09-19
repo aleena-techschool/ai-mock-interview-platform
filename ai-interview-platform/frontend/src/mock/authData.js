@@ -6,9 +6,9 @@ export const dummyUsers = [
         password: "123456",
         name: "Aleena Mathew",
         role: "student",
-
         batchId: "BATCH004",
-        placed:true
+        placed:true ,
+        placedDate:"03-05-2026"
         
     },
     {
@@ -18,8 +18,9 @@ export const dummyUsers = [
         password: "password123",
         name: "John Doe",
         role: "student",
-        batchId: "BATCH004",
-        placed:true
+        batchId: "BATCH003",
+        placed:true,
+        placedDate:"03-02-2026"
     },
     {
         id: 3,
@@ -29,7 +30,8 @@ export const dummyUsers = [
         name: "John Doe",
         role: "student",
         batchId: "BATCH004",
-        placed:true
+        placed:true,
+        placedDate:"03-04-2026"
     },
     {
         id: 4,
@@ -48,7 +50,7 @@ export const dummyUsers = [
         password: "password123",
         name: "John Doe",
         role: "student",
-        batchId: "BATCH004",
+        batchId: "BATCH001",
         placed:false
     },
     {
@@ -58,7 +60,7 @@ export const dummyUsers = [
         password: "password123",
         name: "John Doe",
         role: "student",
-        batchId: "BATCH004",
+        batchId: "BATCH003",
         placed:false
     },
 ];

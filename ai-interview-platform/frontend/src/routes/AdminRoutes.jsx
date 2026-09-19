@@ -8,6 +8,12 @@ import MentorManagement from "../pages/Admin/MentorManagement";
 import MentorDetails from "../pages/Admin/MentorDetails";
 import PlacementManagement from "../pages/Admin/PlacementManagement";
 import PlacedStudents from "../pages/Admin/PlacedStudents";
+import ReportPage from "../pages/Admin/ReportPage";
+import StudentReport from "../pages/Admin/StudentReport";
+import MentorReport from "../pages/Admin/MentorReport";
+import PlacementReportPage from "../pages/Admin/PlacementReportPage";
+import PlatformAnalytics from "../pages/Admin/PlatfromAnalyticsPage";
+import NotoficationPage from "../pages/Admin/NotificationPage";
 
 
 
@@ -96,6 +102,73 @@ export default function AdminRoutes() {
         }
       />
 
+
+      <Route
+        path="/reports"
+        element={
+          <AdminProtectedRoute>
+            <ReportPage />
+          </AdminProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/student-report"
+        element={
+          <AdminProtectedRoute>
+            <StudentReport />
+          </AdminProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/mentor-report"
+        element={
+          <AdminProtectedRoute>
+            <MentorReport />
+          </AdminProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/placement-report"
+        element={
+          <AdminProtectedRoute>
+            <PlacementReportPage />
+          </AdminProtectedRoute>
+        }
+      />
+
+
+      <Route
+        path="/report/:batchId"
+        element={
+          <AdminProtectedRoute>
+            <PlacedStudents />
+          </AdminProtectedRoute>
+        }
+      />
+    {/* platform-analytics */}
+    <Route
+        path="/platform-analytics"
+        element={
+          <AdminProtectedRoute>
+            <PlatformAnalytics />
+          </AdminProtectedRoute>
+        }
+      />
+
+
+      {/* NotificationsPage */}
+
+      <Route
+        path="/notifications"
+        element={
+          <AdminProtectedRoute>
+            <NotoficationPage />
+          </AdminProtectedRoute>
+        }
+      />
 
       {/* Unknown admin route */}
       <Route

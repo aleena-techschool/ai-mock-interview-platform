@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate} from "react-router-dom"
+import { useNavigate,useLocation} from "react-router-dom"
 import { dummyUsers } from "../../../mock/authData";
 import { batchData } from "../../../mock/student management/batch";
 
@@ -9,6 +9,12 @@ export default function PlacementBatch({ trainer }) {
 
   // Inactive selected by default
   const [batchStatus, setBatchStatus] = useState("Inactive");
+   
+
+  const location=useLocation()
+  const isReport=location.pathname==="/admin/placement-report"
+  
+
 
 //  active batch
   const activeBatches = batchData
@@ -90,6 +96,133 @@ export default function PlacementBatch({ trainer }) {
       ? activeBatches
       : inactiveBatches;
 
+
+
+
+
+  //  functions for exporting 
+
+      const exportToCSV = (headers, rows, fileName) => {
+      const csvData = [
+        headers,
+        ...rows
+      ];
+
+      const csvContent = csvData
+        .map((row) =>
+          row
+            .map((value) =>
+              `"${String(value ?? "").replace(/"/g, '""')}"`
+            )
+            .join(",")
+        )
+        .join("\n");
+
+      const blob = new Blob(
+        [csvContent],
+        {
+          type: "text/csv;charset=utf-8;"
+        }
+      );
+
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = fileName;
+
+      document.body.appendChild(link);
+      link.click();
+
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    };
+
+    const handleFullExport = () => {
+
+      const batchesToExport = displayedBatches;
+
+      if (batchesToExport.length === 0) {
+        alert(`No ${batchStatus.toLowerCase()} batches available to export.`);
+        return;
+      }
+
+      const headers = [
+        "Placement Trainer",
+        "Batch ID",
+        "Batch Name",
+        "Batch Time",
+        "Batch Status",
+        "Total Students",
+        "Placed Students",
+        "Not Placed Students",
+        "Placement Rate"
+      ];
+
+      const rows = batchesToExport.map((batch) => [
+        trainer.name,
+        batch.batchId,
+        batch.name,
+        batch.time,
+        batch.status,
+        batch.totalStudents,
+        batch.placedStudents,
+        batch.notPlacedStudents,
+        `${batch.placementRate}%`
+      ]);
+
+      exportToCSV(
+        headers,
+        rows,
+        `${trainer.name}_${batchStatus}_Placement_Report.csv`
+      );
+    };
+
+    const exportBatchData = (batchId) => {
+
+      const studentsToExport = dummyUsers.filter(
+        (student) => student.batchId === batchId
+      );
+
+      const batch = batchData.find(
+        (batch) => batch.batchId === batchId
+      );
+
+      if (studentsToExport.length === 0) {
+        alert("No students found in this batch.");
+        return;
+      }
+
+      const headers = [
+        "Student ID",
+        "Student Name",
+        "Email",
+        "Batch ID",
+        "Batch Name",
+        "Batch Time",
+        "Placement Status",
+        "Placed Date"
+      ];
+
+      const rows = studentsToExport.map((student) => [
+        student.studentId,
+        student.name,
+        student.email,
+        student.batchId,
+        batch?.name || "",
+        batch?.time || "",
+        student.placed ? "Placed" : "Not Placed",
+        student.placedDate || ""
+      ]);
+
+      exportToCSV(
+        headers,
+        rows,
+        `${batch?.name || batchId}_Student_Report.csv`
+      );
+    };
+
   return (
     <div className="mt-5 rounded-xl border border-gray-200 bg-white shadow-sm">
 
@@ -105,6 +238,9 @@ export default function PlacementBatch({ trainer }) {
             View placement statistics for assigned batches
           </p>
         </div>
+
+       
+        
 
         {/* Active / Inactive Toggle */}
         <div className="flex rounded-lg bg-gray-100 p-1">
@@ -150,6 +286,48 @@ export default function PlacementBatch({ trainer }) {
           </button>
 
         </div>
+
+
+         {/* buttn for export only if it is report page */}
+        {isReport &&
+        <div>
+          <button
+                                onClick={handleFullExport}
+                                className="
+                                  inline-flex items-center justify-center gap-2
+                                  h-10 px-4
+                                  rounded-lg
+                                  border border-gray-200
+                                  bg-white
+                                  text-sm font-medium text-gray-700
+                                  shadow-sm
+                                  transition-all
+                                  hover:bg-gray-50
+                                  hover:border-gray-300
+                                  focus:outline-none
+                                  focus:ring-2
+                                  focus:ring-emerald-100
+                                "
+                                >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth="1.8"
+                                  stroke="currentColor"
+                                  className="w-4 h-4"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"
+                                  />
+                                </svg>
+
+                                Export 
+                               </button>
+        </div>
+        }
 
       </div>
 
@@ -269,7 +447,7 @@ export default function PlacementBatch({ trainer }) {
 
                   {/* Action */}
                   <td className="px-5 py-4 text-center">
-
+                    {!isReport ?
                     <button
                       type="button"
                       onClick={() =>navigate(`/admin/batch/${b.batchId}`)}
@@ -281,7 +459,21 @@ export default function PlacementBatch({ trainer }) {
                       "
                     >
                       View
+                    </button> :
+
+                    <button
+                      type="button"
+                      onClick={() => exportBatchData(b.batchId)}
+                      className="
+                        rounded-lg px-3 py-1.5
+                        text-xs font-semibold
+                        text-indigo-600
+                        transition hover:bg-indigo-50
+                      "
+                    >
+                      Export
                     </button>
+                      }
 
                   </td>
 
