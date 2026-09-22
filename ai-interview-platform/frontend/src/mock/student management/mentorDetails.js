@@ -108,8 +108,8 @@ export const mentors = [
 export const placement=[
 {
     employeeId: "MTR011",
-    name: "Druv",
-    email: "vikram.singh@offenso.com",
+    name: "Shyam",
+    email: "shyam@offenso.com",
     phoneNumber: "+91 96789 12345",
     address: "Delhi, India",
     designation: "Placement Trainer",
@@ -119,7 +119,7 @@ export const placement=[
   {
     employeeId: "MTR012",
     name: "Vikram",
-    email: "vikram.singh@offenso.com",
+    email: "vikram@offenso.com",
     phoneNumber: "+91 96789 12345",
     address: "Delhi, India",
     designation: "Placement Trainer",
@@ -128,7 +128,7 @@ export const placement=[
    {
     employeeId: "MTR013",
     name: "Rahul",
-    email: "vikram.singh@offenso.com",
+    email: "rahul@offenso.com",
     phoneNumber: "+91 96789 12345",
     address: "Delhi, India",
     designation: "Placement Trainer",

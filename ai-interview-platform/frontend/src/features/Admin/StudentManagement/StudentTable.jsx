@@ -1,8 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { dummyUsers } from "../../../mock/authData";
 
-export default function StudentTable({ selectedBatchId,actions=[] }) {
+
+// this compnet is child of more than one component  behaviour of these is depends
+// location 
+//1) student management in Admin module 
+//2) placemnt mangement in Admin module==>it need plced or not field
+//3) placement managemtn in Placement module==>it need a view button for each row
+
+export default function StudentTable({ selectedBatchId,actions=[],isAdmin }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   
@@ -11,10 +18,13 @@ export default function StudentTable({ selectedBatchId,actions=[] }) {
   const studentsPerPage = 5;
   const searchValue = search.toLowerCase().trim();
 
+  const navigate=useNavigate()
+
   // Detect Placement Management page
   
   const isPlacementPage =
     location.pathname.includes("/batch/");
+  
 
  
   // Students belonging to selected batch
@@ -26,6 +36,7 @@ export default function StudentTable({ selectedBatchId,actions=[] }) {
         String(selectedBatchId).trim()
     );
   }, [selectedBatchId]);
+
 
   
   // Search students
@@ -383,6 +394,12 @@ export default function StudentTable({ selectedBatchId,actions=[] }) {
                     )
                   }
 
+                  {!isAdmin && (
+                    <th className="px-6 py-3.5 font-semibold text-gray-600">
+                      Action
+                    </th>
+                  )}
+
                  
 
                 </tr>
@@ -574,8 +591,21 @@ export default function StudentTable({ selectedBatchId,actions=[] }) {
                                 Export 
                                </button>
                                </td>
-  )
-}
+                        )
+                      }
+
+                      {
+                        !isAdmin &&(
+                           <td className="px-4 py-3">
+        <button
+            onClick={() => navigate(`/placement/student/${student.studentId}`)}
+            className="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition"
+        >
+            View
+        </button>
+    </td>
+                        )
+                      }
 
                         
 

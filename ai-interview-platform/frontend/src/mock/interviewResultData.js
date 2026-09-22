@@ -3,7 +3,7 @@
 export const interviewResults = [
   {
     id: "INT001",
-
+    studId:"STU002",
     role: "Flutter Developer",
     type: "Technical",
     mode: "Text + Voice",
@@ -123,7 +123,7 @@ export const interviewResults = [
 
   {
     id: "INT002",
-
+    studId:"STU001",
     role: "MERN Stack",
     type: "Technical",
     mode: "Text",
@@ -234,7 +234,7 @@ export const interviewResults = [
 
   {
     id: "INT003",
-
+    studId:"STU001",
     role: "HR Round",
     type: "Behavioral",
     mode: "Voice",
@@ -339,7 +339,7 @@ export const interviewResults = [
 
   {
     id: "INT004",
-
+     studId:"STU001",
     role: "Python Developer",
     type: "Technical",
     mode: "Text",
@@ -450,7 +450,7 @@ export const interviewResults = [
 
   {
     id: "INT005",
-
+    studId:"STU001",
     role: "Coding Round",
     type: "Coding",
     mode: "Monaco Editor",

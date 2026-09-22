@@ -1,10 +1,13 @@
 
 import { useNavigate } from "react-router-dom";
+import Breadcrumbs from "../../Admin/common/Breadcrumbs";
 
 export default function InterviewResultHeader({
   interview,
   activeTab,
   setActiveTab,
+  isStudent,
+  studId
 }) {
   const navigate = useNavigate();
 
@@ -22,6 +25,8 @@ export default function InterviewResultHeader({
   return (
     <>
       {/* Back to History */}
+      {
+        isStudent?
       <button
         onClick={() => navigate("/history")}
         className="flex items-center gap-2 text-sm text-gray-500 hover:text-green-600 mb-4"
@@ -42,7 +47,24 @@ export default function InterviewResultHeader({
 
         Back to Interview History
       </button>
-
+      :
+      <div className="mb-5">
+      <Breadcrumbs
+        items={[
+          {
+            label: "Dashboard",
+            path: "/placement/dashboard"
+          },
+          {
+            label: "Interview Info",
+            path: `/placement/student/${studId}`
+          },
+          {
+            label: "Interview Details"
+          }
+        ]}
+      /></div>
+      }
       {/* Interview Header  div with interview details*/}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-5">
         <div className="flex items-center justify-between">

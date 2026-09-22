@@ -55,7 +55,7 @@ export const batchData = [
         time:"9:30",
         name: "Batch 4",
         status: "Active",
-        Placement:"MTR013",
+        Placement:"MTR012",
         start:"01-05-2026",
         
     },

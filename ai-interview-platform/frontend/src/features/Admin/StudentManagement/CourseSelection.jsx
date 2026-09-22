@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import { courseData } from "../../../mock/student management/course";
 import { batchData } from "../../../mock/student management/batch";
@@ -7,24 +8,51 @@ import { mentors } from "../../../mock/student management/mentorDetails";
 
 import ActiveBatchList from "./ActiveBatchList";
 import InactiveBatchTable from "./InactiveBatchList";
+import { useSelector } from "react-redux";
 
-export default function CourseSelection({ onBatchSelect }) {
+
+
+
+// use selection component is used in admin and placement section
+//for admin we need all active nad inactive batches under each course
+// for placement we does not need active and inactive toggle there
+//  we wnt only active batcehs here but we do not need all active 
+// batches only need active batches under Loggined Placement trainer and course selected 
+// so we need to check where it come under admin/placement using current location
+
+export default function CourseSelection({ onBatchSelect,isAdmin }) {
+
+    const user = useSelector((state) => state.auth.user);
+    
+    const mentorId=user? user.mentorId:"MTR011"
+
     const [selectedCourse, setSelectedCourse] = useState(
         courseData[0]?.courseId || null
     );
     const [batchStatus, setBatchStatus] = useState("Active");
     const [selectedBatch, setSelectedBatch] = useState(null);
 
+    // take current url and check whether it is admin or not
+    // const location=useLocation()
+    // const path=location.pathname
+    // const isAdmin= !(path==="/placement/dashboard")
+    
+
+
+
+
     // Get batches for selected course and status
     const filteredBatches = useMemo(
-        () =>
-            batchData.filter(
-                (batch) =>
-                    batch.courseId === selectedCourse &&
-                    batch.status.toLowerCase() === batchStatus.toLowerCase()
-            ),
-        [selectedCourse, batchStatus]
-    );
+    () =>
+        batchData.filter(
+            (batch) =>
+                batch.courseId === selectedCourse &&
+                batch.status.toLowerCase() === batchStatus.toLowerCase() &&
+                (isAdmin || batch.Placement === mentorId)// if isAdmin is True show all batch else only batches where the placement trainer/mentor matches mentorId are shown.
+        ),
+    [batchData, selectedCourse, batchStatus, isAdmin, mentorId]
+);
+    // --------------------------
 
     console.log("selected status batches :", filteredBatches);
 
@@ -94,7 +122,12 @@ export default function CourseSelection({ onBatchSelect }) {
             </div>
 
             {/* Batch Status */}
+
+           
+            
             <div className="px-5 pt-6 pb-5">
+
+                {isAdmin &&
                 <div className="flex items-center gap-2">
                     {/* Active */}
                     <button
@@ -152,6 +185,7 @@ export default function CourseSelection({ onBatchSelect }) {
                         Inactive Batches
                     </button>
                 </div>
+                }
 
                 {/* Batch List */}
                 <div className="mt-5">
@@ -171,6 +205,7 @@ export default function CourseSelection({ onBatchSelect }) {
                     )}
                 </div>
             </div>
+
         </section>
     );
 }

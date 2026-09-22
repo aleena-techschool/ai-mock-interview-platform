@@ -6,7 +6,7 @@ export const dummyUsers = [
         password: "123456",
         name: "Aleena Mathew",
         role: "student",
-        batchId: "BATCH004",
+        batchId: "BATCH001",
         placed:true ,
         placedDate:"03-05-2026"
         
@@ -29,7 +29,7 @@ export const dummyUsers = [
         password: "password123",
         name: "John Doe",
         role: "student",
-        batchId: "BATCH004",
+        batchId: "BATCH001",
         placed:true,
         placedDate:"03-04-2026"
     },
@@ -40,7 +40,7 @@ export const dummyUsers = [
         password: "password123",
         name: "John Doe",
         role: "student",
-        batchId: "BATCH004",
+        batchId: "BATCH001",
         placed:false
     },
     {
@@ -64,3 +64,30 @@ export const dummyUsers = [
         placed:false
     },
 ];
+
+export const placementTrainers=[
+
+    {
+        id: 1,
+        mentorId: "MTR011",
+        email: "shyam@offenso.com",
+        password: "password123",
+        name: "Shyam"
+    },
+
+     {
+        id: 1,
+        mentorId: "MTR012",
+        email: "vikram@offenso.com",
+        password: "password123",
+        name: "Vikram"
+    },
+     {
+        id: 1,
+        mentorId: "MTR011",
+        email: "rahul@offenso.com",
+        password: "password123",
+        name: "Rahul"
+    },
+
+]
