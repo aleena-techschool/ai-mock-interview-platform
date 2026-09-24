@@ -4,9 +4,14 @@ import CourseSelection from "../../features/Admin/StudentManagement/CourseSelect
 import StudentTable from "../../features/Admin/StudentManagement/StudentTable";
 import Breadcrumbs from "../../features/Admin/common/Breadcrumbs";
 import { dummyUsers } from "../../mock/authData";
+import { useLocation } from "react-router-dom";
 
 export default function StudentReport() {
   const [selectedBatchId, setSelectedBatchId] = useState(null);
+
+  const location=useLocation()
+    const path=location.pathname
+    const isAdmin= path.includes("admin")
   
   const handleBatchSelect = useCallback((batchId) => {
     setSelectedBatchId(batchId);
@@ -142,8 +147,10 @@ function studentReport(id) {
             selectedBatchId={selectedBatchId}
              actions={{
                 fullReport: fullReport,
-                studentReport: studentReport
+                studentReport: studentReport,
+                
             }}
+            isAdmin={isAdmin}
           />
         </div>
 

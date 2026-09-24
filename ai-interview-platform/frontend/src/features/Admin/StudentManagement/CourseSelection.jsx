@@ -29,16 +29,33 @@ export default function CourseSelection({ onBatchSelect,isAdmin }) {
     const [selectedCourse, setSelectedCourse] = useState(
         courseData[0]?.courseId || null
     );
-    const [batchStatus, setBatchStatus] = useState("Active");
+     // take current url and check whether it is admin or not
+    const location=useLocation()
+    const path=location.pathname
+    const isInactive= (path==="/placement/inactive")
+
+    
+//  if we coming from placement module and need inactive initial stae of 
+// batchstatus is Inactive else Asctive
+
+// In Placement, batch status is controlled by the URL.
+// Sync the status when navigating between /placement/dashboard and /placement/inactive.
+// Admin controls the status manually using the Active/Inactive toggle.
+
+   const [batchStatus, setBatchStatus] = useState(
+    isInactive ? "Inactive" : "Active"
+        );
+
+    useEffect(() => {
+        if (!isAdmin) {
+            setBatchStatus(isInactive ? "Inactive" : "Active");
+        }
+    }, [isInactive, isAdmin]);
+            console.log("inactive",batchStatus)
+
     const [selectedBatch, setSelectedBatch] = useState(null);
 
-    // take current url and check whether it is admin or not
-    // const location=useLocation()
-    // const path=location.pathname
-    // const isAdmin= !(path==="/placement/dashboard")
-    
-
-
+   
 
 
     // Get batches for selected course and status

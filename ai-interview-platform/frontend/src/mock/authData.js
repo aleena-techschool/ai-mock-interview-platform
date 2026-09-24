@@ -8,7 +8,8 @@ export const dummyUsers = [
         role: "student",
         batchId: "BATCH001",
         placed:true ,
-        placedDate:"03-05-2026"
+        placedDate:"03-05-2026",
+        company:"TCS"
         
     },
     {
@@ -20,7 +21,8 @@ export const dummyUsers = [
         role: "student",
         batchId: "BATCH003",
         placed:true,
-        placedDate:"03-02-2026"
+        placedDate:"03-02-2026",
+        company:"EY"
     },
     {
         id: 3,
@@ -31,7 +33,8 @@ export const dummyUsers = [
         role: "student",
         batchId: "BATCH001",
         placed:true,
-        placedDate:"03-04-2026"
+        placedDate:"03-04-2026",
+        company:"TCS"
     },
     {
         id: 4,
@@ -41,7 +44,9 @@ export const dummyUsers = [
         name: "John Doe",
         role: "student",
         batchId: "BATCH001",
-        placed:false
+        placed:true,
+        company:"TCS"
+
     },
     {
         id: 5,
@@ -51,7 +56,8 @@ export const dummyUsers = [
         name: "John Doe",
         role: "student",
         batchId: "BATCH001",
-        placed:false
+        placed:true,
+        company:"TCS"
     },
     {
         id: 6,
@@ -61,7 +67,8 @@ export const dummyUsers = [
         name: "John Doe",
         role: "student",
         batchId: "BATCH003",
-        placed:false
+        placed:true,
+        company:"TCS"
     },
 ];
 
