@@ -8,6 +8,7 @@ import StudentInterview from "../pages/Placement/StudentInterview";
 import CompletedBatch from "../pages/Trainer/completedBatch";
 import PlacedstudentPage from "../pages/Trainer/PlacedstudentPage";
 import InterviewResultDetailsPage from "../pages/InterviewResultDetailsPage";
+import NotificationPage from "../pages/Trainer/NotificationPage";
 
 
 
@@ -84,6 +85,16 @@ export default function TrainerRoutes(){
                     element={
                       <ProtectedRoute>
                         <PlacedstudentPage />
+                      </ProtectedRoute>
+                    }
+                  />
+
+                           {/* -----------------------------NOTIFICATION--------------- */}
+            <Route
+                    path="/notifications"
+                    element={
+                      <ProtectedRoute>
+                        <NotificationPage />
                       </ProtectedRoute>
                     }
                   />

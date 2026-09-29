@@ -1,4 +1,4 @@
-const notificationData = [
+export const notificationData = [
     {
         id: 1,
         title: "Mock Interview Scheduled",
@@ -81,4 +81,3 @@ const notificationData = [
     },
 ];
 
-export default notificationData;
