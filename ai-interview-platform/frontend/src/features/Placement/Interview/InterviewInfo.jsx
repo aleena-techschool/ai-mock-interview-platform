@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { interviewResults} from "../../../mock/interviewResultData"
 import InterviewBarChart from "./InterviewBarChart";
 import InterviewPieChart from "./InterviewPieChart";
@@ -163,10 +163,20 @@ export default function InterviewInfo({ studId }) {
     //handle view
     const navigate = useNavigate();
 
+    const location=useLocation()
+    const isPlacement=location.pathname.includes("placement")
+
 
     // placement/students/STU001/interviews/INT002
     const handleViewDetails = (interview) => {
-        navigate(`/placement/students/${studId}/interviews/${interview.id}`);
+        // if it is from placement
+        if (isPlacement){        
+            navigate(`/placement/students/${studId}/interviews/${interview.id}`);
+            }
+            else{
+        navigate(`/trainer/students/${studId}/interviews/${interview.id}`);
+
+            }
     };
 
 

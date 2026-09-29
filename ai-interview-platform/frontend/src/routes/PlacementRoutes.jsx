@@ -84,6 +84,9 @@ export default function PlacementRoutes(){
                       </PlacementProtectedRoute>
                     }
                   />
+
+
+                  <Route path="*" element={<Navigate to="/placement" replace />} />
         </Routes>
 
        
