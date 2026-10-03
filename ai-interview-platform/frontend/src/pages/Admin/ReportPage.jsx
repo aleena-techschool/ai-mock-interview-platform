@@ -19,6 +19,11 @@ export default function ReportPage() {
         {/* Fixed TopBar */}
         <div className="relative z-10 shrink-0">
           <AdminTopBar />
+
+          {/* Overlapping Date */}
+          <div className="absolute top-[90px] right-6 z-50 -translate-y-1/2">
+            <TodayDate />
+          </div>
         </div>
 
         {/* Scrollable Main Content */}
@@ -26,18 +31,10 @@ export default function ReportPage() {
 
           {/* Page Header */}
           <div className="relative shrink-0 bg-blue-50">
-
             <PageHeader
               title="Report"
               description="Export detailed reports and complete data from the platform"
             />
-
-            <div
-              className="absolute right-6 top-[10px] z-50 -translate-y-1/2"
-            >
-              <TodayDate />
-            </div>
-
           </div>
 
           {/* Main Report Cards */}

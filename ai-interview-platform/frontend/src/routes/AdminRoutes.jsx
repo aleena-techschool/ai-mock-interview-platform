@@ -12,6 +12,8 @@ import ReportPage from "../pages/Admin/ReportPage";
 import StudentReport from "../pages/Admin/StudentReport";
 import MentorReport from "../pages/Admin/MentorReport";
 import PlacementReportPage from "../pages/Admin/PlacementReportPage";
+import PlatformAnalytics from "../pages/Admin/PlatfromAnalyticsPage";
+import NotoficationPage from "../pages/Admin/NotificationPage";
 
 
 
@@ -146,7 +148,27 @@ export default function AdminRoutes() {
           </AdminProtectedRoute>
         }
       />
+    {/* platform-analytics */}
+    <Route
+        path="/platform-analytics"
+        element={
+          <AdminProtectedRoute>
+            <PlatformAnalytics />
+          </AdminProtectedRoute>
+        }
+      />
 
+
+      {/* NotificationsPage */}
+
+      <Route
+        path="/notifications"
+        element={
+          <AdminProtectedRoute>
+            <NotoficationPage />
+          </AdminProtectedRoute>
+        }
+      />
 
       {/* Unknown admin route */}
       <Route
