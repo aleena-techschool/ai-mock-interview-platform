@@ -6,14 +6,11 @@ import lock from "../../../assets/lock.png";
 import user from "../../../assets/user.png"
 import InputField from "../../../components/ui/InputField";
 import logo from "../../../assets/logo.svg";
-import { dummyUsers } from "../../../mock/adminAuthData";
+import { Trainers } from "../../../mock/authData";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../authSlice";
 
-
-
-//here we use dummy users from mock data to check whether it is valid user
-export default function AdminLoginForm() {
+export default function TrainerLoginForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [form, setForm] = useState({ id: "", email: "", password: "" });
@@ -28,7 +25,7 @@ export default function AdminLoginForm() {
             return;
         }
         setLoading(true);
-        const user = dummyUsers.find(
+        const user = Trainers.find(
             (u) =>
 
                 u.email === form.email &&
@@ -41,7 +38,7 @@ export default function AdminLoginForm() {
                     token: "dummy-token"
                 })
             );
-            navigate("/admin/dashboard")
+            navigate("/trainer/dashboard")
         } else {
             setError("Invalid credentials. Please try again.");
         }

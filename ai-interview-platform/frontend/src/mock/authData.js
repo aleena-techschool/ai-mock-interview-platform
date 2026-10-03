@@ -6,7 +6,7 @@ export const dummyUsers = [
         password: "123456",
         name: "Aleena Mathew",
         role: "student",
-        batchId: "BATCH001",
+        batchId: "BATCH002",
         placed:true ,
         placedDate:"03-05-2026",
         company:"TCS"
@@ -32,9 +32,8 @@ export const dummyUsers = [
         name: "John Doe",
         role: "student",
         batchId: "BATCH001",
-        placed:true,
-        placedDate:"03-04-2026",
-        company:"TCS"
+        placed:false,
+        
     },
     {
         id: 4,
@@ -71,6 +70,31 @@ export const dummyUsers = [
         company:"TCS"
     },
 ];
+
+export const Trainers=[
+    {
+        id:1,
+        employeeId: "MTR001",
+        name: "Aleena",
+        email: "ananya.sharma@offenso.com",
+        password:"1234567"
+    },
+    {
+        id:1,
+        employeeId: "MTR002",
+        name: "Midhun",
+        email: "midhun@offenso.com",
+        password:"1234567"
+    },
+    {
+        id:1,
+        employeeId: "MTR003",
+        name: "Siddharth Roy",
+        email: "siddharth.roy@offenso.com",
+        password:"1234567"
+    },
+
+]
 
 export const placementTrainers=[
 

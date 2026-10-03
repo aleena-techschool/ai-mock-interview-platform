@@ -51,7 +51,7 @@ export default function CourseSelection({ onBatchSelect,isAdmin }) {
             setBatchStatus(isInactive ? "Inactive" : "Active");
         }
     }, [isInactive, isAdmin]);
-            console.log("inactive",batchStatus)
+            // console.log("inactive",batchStatus)
 
     const [selectedBatch, setSelectedBatch] = useState(null);
 
@@ -71,7 +71,7 @@ export default function CourseSelection({ onBatchSelect,isAdmin }) {
 );
     // --------------------------
 
-    console.log("selected status batches :", filteredBatches);
+    // console.log("selected status batches :", filteredBatches);
 
     // Get number of students in a batch
     const getStudentCount = (batchId) =>

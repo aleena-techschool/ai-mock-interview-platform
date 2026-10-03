@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react";
 import CourseCard from "../../Admin/StudentManagement/CourseCard";
 import CourseSelection from "../../Admin/StudentManagement/CourseSelection";
-import StudentTable from "../../Admin/StudentManagement/StudentTable";
 import { useLocation } from "react-router-dom";
+import StudentTable from "../StudentTable";
 
 export default function ActiveBatches(){
 

@@ -14,8 +14,10 @@ import InterviewResultHeader from "../features/interviews/interviewHistory/Inter
 import InterviewResultDetails from "../features/interviews/interviewHistory/InterviewResultDetails";
 import PerformanceSummary from "../features/interviews/interviewHistory/PerformanceSummary";
 import InterviewQusetionAnswer from "../features/interviews/interviewHistory/InterviewQuestionAnswer";
+import TrainerSidebar from "../features/Trainer/dashboard/Sidebar";
+import TrainerTopBar from "../features/Trainer/dashboard/Topbar";
 
-// this page used by student and plcement module using location
+// this page used by student , plcement and trainer module using location
 // we will find out how it hsould be displayed
 
 
@@ -24,8 +26,14 @@ export default function InterviewResultDetailsPage() {
   const {studId}=useParams()
 
   const location=useLocation()
-  const isStudent=!(location.pathname.includes("placement"))
-  console.log(isStudent)
+  const isStudent=!((location.pathname.includes("placement"))||(location.pathname.includes("trainer")))
+  // console.log(isStudent)
+
+  const isPlacement=(location.pathname.includes("placement"))
+
+  const isTrainer=(location.pathname.includes("trainer"))
+
+  console.log("isTrainer :",isTrainer)
  
 
   // Active tab
@@ -40,14 +48,30 @@ export default function InterviewResultDetailsPage() {
     return (
       <div className="flex h-screen overflow-hidden bg-gray-50">
         {
-          isStudent ? <Sidebar />:<PlacementSidebar/>
+          isStudent && <Sidebar />
+        }
+
+        {
+          isPlacement && <PlacementSidebar/>
+        }
+
+        {
+          isTrainer && <TrainerSidebar/>
         }
        
 
         <div className="flex-1 flex flex-col overflow-hidden">
           
           {
-            isStudent? <TopBar />:<PlacementTopBar/>
+            isStudent &&<TopBar />
+          }
+
+          {
+            isPlacement && <PlacementTopBar/>
+          }
+
+          {
+            isTrainer && <TrainerTopBar/>
           }
 
           <main className="flex-1 flex items-center justify-center">
@@ -75,19 +99,30 @@ export default function InterviewResultDetailsPage() {
       }}
     >
       {/* Sidebar */}
-      {  isStudent ?
-      <Sidebar /> : <PlacementSidebar/>
+      {  isStudent &&
+      <Sidebar /> 
+      }
+
+      {
+        isPlacement &&
+        <PlacementSidebar/>
+      }
+
+      {
+        isTrainer &&
+        <TrainerSidebar/>
       }
 
       {/* Main */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        {
-            isStudent?
-            <TopBar /> : <PlacementTopBar/>
-        }
+        
         
 
-        <main className="flex-1 overflow-y-auto px-6 py-5">
+       <main
+  className={`flex-1 overflow-y-auto px-6 py-5 ${
+    (isPlacement || isTrainer) ? "bg-blue-50" : ""
+  }`}
+>
 
           {/* Header + Tabs */}
           <InterviewResultHeader
