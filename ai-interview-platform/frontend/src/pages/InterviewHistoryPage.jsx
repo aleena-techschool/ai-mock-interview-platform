@@ -7,10 +7,25 @@ import TopBar from "../features/dashboard/TopBar";
 import InterviewHistoryCard from "../features/interviews/interviewHistory/InterviewHistoryCard";
 import InterviewHistoryFilter from "../features/interviews/interviewHistory/InterviewHistoryFilter";
 
-import { interviewResults } from "../mock/interviewResultData";
+import {  interviewResults } from "../mock/interviewResultData";
+import { useSelector } from "react-redux";
 
 export default function InterviewHistoryPage() {
   const navigate = useNavigate();
+
+  // ==========================================
+  // LOGGINED USER
+  // ==========================================
+    const user = useSelector((state) => state.auth.user)
+    const userId=user ? user.studentId  : "STU001"
+
+    //=====================================
+    // interviewresults of loggies user
+    //=========================================
+    const interviewResult=interviewResults.filter((interview)=>{
+                    return interview.studId===userId
+    })
+
 
   // ==========================================
   // FILTER STATES
@@ -38,22 +53,23 @@ export default function InterviewHistoryPage() {
   const [selectedInterview, setSelectedInterview] =
     useState(null);
 
+
   // ==========================================
   // COUNTS
   // ==========================================
 
   const counts = {
-    all: interviewResults.length,
+    all: interviewResult.length,
 
-    technical: interviewResults.filter(
+    technical: interviewResult.filter(
       (item) => item.type === "Technical"
     ).length,
 
-    behavioral: interviewResults.filter(
+    behavioral: interviewResult.filter(
       (item) => item.type === "Behavioral"
     ).length,
 
-    coding: interviewResults.filter(
+    coding: interviewResult.filter(
       (item) => item.type === "Coding"
     ).length,
   };
@@ -62,7 +78,7 @@ export default function InterviewHistoryPage() {
   // FILTER INTERVIEWS
   // ==========================================
 
-  const filteredInterviews = interviewResults.filter(
+  const filteredInterviews = interviewResult.filter(
     (interview) => {
       // ----------------------------------------
       // TYPE

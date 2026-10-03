@@ -13,7 +13,7 @@ import { setCredentials } from "../authSlice";
 export default function AdminLoginForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [form, setForm] = useState({ studentId: "", email: "", password: "" });
+    const [form, setForm] = useState({ id: "", email: "", password: "" });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 

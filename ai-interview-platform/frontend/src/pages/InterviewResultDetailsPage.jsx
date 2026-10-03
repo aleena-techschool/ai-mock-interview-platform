@@ -1,9 +1,12 @@
 
 import { useState } from "react";
-import { useParams } from "react-router-dom";
-
+import { useLocation, useParams } from "react-router-dom";
+//for student
 import Sidebar from "../features/dashboard/Sidebar";
 import TopBar from "../features/dashboard/TopBar";
+//for placement
+import PlacementSidebar from "../features/Placement/Dashboard/Sidebar";
+import PlacementTopBar from "../features/Placement/Dashboard/TopBar";
 
 import { interviewResults } from "../mock/interviewResultData";
 
@@ -12,8 +15,18 @@ import InterviewResultDetails from "../features/interviews/interviewHistory/Inte
 import PerformanceSummary from "../features/interviews/interviewHistory/PerformanceSummary";
 import InterviewQusetionAnswer from "../features/interviews/interviewHistory/InterviewQuestionAnswer";
 
+// this page used by student and plcement module using location
+// we will find out how it hsould be displayed
+
+
 export default function InterviewResultDetailsPage() {
   const { id } = useParams();
+  const {studId}=useParams()
+
+  const location=useLocation()
+  const isStudent=!(location.pathname.includes("placement"))
+  console.log(isStudent)
+ 
 
   // Active tab
   const [activeTab, setActiveTab] = useState("Overview");
@@ -26,10 +39,16 @@ export default function InterviewResultDetailsPage() {
   if (!interview) {
     return (
       <div className="flex h-screen overflow-hidden bg-gray-50">
-        <Sidebar />
+        {
+          isStudent ? <Sidebar />:<PlacementSidebar/>
+        }
+       
 
         <div className="flex-1 flex flex-col overflow-hidden">
-          <TopBar />
+          
+          {
+            isStudent? <TopBar />:<PlacementTopBar/>
+          }
 
           <main className="flex-1 flex items-center justify-center">
             <div className="text-center">
@@ -56,11 +75,17 @@ export default function InterviewResultDetailsPage() {
       }}
     >
       {/* Sidebar */}
-      <Sidebar />
+      {  isStudent ?
+      <Sidebar /> : <PlacementSidebar/>
+      }
 
       {/* Main */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        <TopBar />
+        {
+            isStudent?
+            <TopBar /> : <PlacementTopBar/>
+        }
+        
 
         <main className="flex-1 overflow-y-auto px-6 py-5">
 
@@ -69,6 +94,8 @@ export default function InterviewResultDetailsPage() {
             interview={interview}
             activeTab={activeTab}
             setActiveTab={setActiveTab}
+            isStudent={isStudent}
+            studId={studId}
           />
 
           {/* ==================================
