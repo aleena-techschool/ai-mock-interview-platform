@@ -14,7 +14,7 @@ export default function ActiveBatches(){
 
      const location=useLocation()
     const path=location.pathname
-    const isAdmin= !(path==="/placement/dashboard")
+    const isAdmin= path.includes("admin")
 
     return(
 

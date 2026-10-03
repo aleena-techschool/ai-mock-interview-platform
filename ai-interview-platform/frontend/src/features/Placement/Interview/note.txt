@@ -1,0 +1,6 @@
+Here we set up components for analyse student performnace from 
+ai mock interview they attended 
+
+total mock interviews 
+performance of interview under each type
+navigated to full detils of each interview they attend

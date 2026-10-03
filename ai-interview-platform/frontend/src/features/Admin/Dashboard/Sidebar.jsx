@@ -163,7 +163,7 @@ export default function AdminSidebar() {
         style={{ borderColor: "rgba(22,163,74,0.12)" }}
       >
         <NavLink
-          to="/settings"
+          to="/admin/settings"
           className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-gray-500 hover:bg-green-50 hover:text-green-700 transition-all"
         >
           <svg

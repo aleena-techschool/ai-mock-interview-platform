@@ -601,7 +601,7 @@ export default function StudentTable({ selectedBatchId,actions=[],isAdmin }) {
             onClick={() => navigate(`/placement/student/${student.studentId}`)}
             className="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition"
         >
-            View
+            Viewss
         </button>
     </td>
                         )

@@ -3,9 +3,6 @@ import { useLocation } from "react-router-dom";
 
 export default function PlacementTopBar() {
   const user = useSelector((state) => state.auth.user);
-
-
- 
   const name = user ? user.name :  "PLACEMENTMENTOR";
 
   const hour = new Date().getHours();

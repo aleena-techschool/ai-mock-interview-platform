@@ -5,6 +5,7 @@ import PlacementDashboard from "../pages/Placement/DashboardPage";
 import StudentInterview from "../pages/Placement/StudentInterview";
 import InterviewResultDetails from "../features/interviews/interviewHistory/InterviewResultDetails";
 import InterviewResultDetailsPage from "../pages/InterviewResultDetailsPage";
+import PlacementPage from "../pages/Placement/PlacementManagePage";
 
 const PlacementProtectedRoute = ({ children }) => {
   const token = useSelector((state) => state.auth.token);
@@ -59,6 +60,30 @@ export default function PlacementRoutes(){
                   </PlacementProtectedRoute>
                 }
               />
+
+
+              {/* //Inactive batch   same as active(dashboard)  */}
+
+
+              <Route
+                    path="/Inactive"
+                    element={
+                      <PlacementProtectedRoute>
+                        <PlacementDashboard />
+                      </PlacementProtectedRoute>
+                    }
+                  />
+
+
+                  {/* placement page */}
+                   <Route
+                    path="/placementmanage"
+                    element={
+                      <PlacementProtectedRoute>
+                        <PlacementPage />
+                      </PlacementProtectedRoute>
+                    }
+                  />
         </Routes>
 
        

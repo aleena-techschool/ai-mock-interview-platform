@@ -1,6 +1,6 @@
 import AdminSidebar from "../../features/Admin/Dashboard/Sidebar";
 import StudentTable from "../../features/Admin/StudentManagement/StudentTable";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { batchData } from "../../mock/student management/batch";
 import { courseData } from "../../mock/student management/course";
 import { mentors } from "../../mock/student management/mentorDetails";
@@ -10,6 +10,9 @@ import AdminTopBar from "../../features/Admin/Dashboard/Topbar";
 
 export default function PlacedStudents() {
     const { batchId } = useParams();
+
+    const location=useLocation()
+    const isAdmin=location.pathname.includes("admin")
     
 
     console.log("placement batch:", batchId);
@@ -193,6 +196,7 @@ export default function PlacedStudents() {
 
                         <StudentTable
                             selectedBatchId={batchId}
+                            isAdmin={isAdmin}
                         />
 
                     </div>

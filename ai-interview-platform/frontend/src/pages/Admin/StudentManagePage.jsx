@@ -8,6 +8,7 @@ import PageHeader from "../../features/Admin/common/PageHeader";
 import CourseCard from "../../features/Admin/StudentManagement/CourseCard";
 import CourseSelection from "../../features/Admin/StudentManagement/CourseSelection";
 import StudentTable from "../../features/Admin/StudentManagement/StudentTable";
+import { useLocation } from "react-router-dom";
 
 export default function StudentManagePage() {
 
@@ -26,6 +27,11 @@ const handleBatchSelect = useCallback((batchId) => {
     setSelectedBatchId(batchId);
     
 }, []);
+
+ const location=useLocation()
+    const path=location.pathname
+    const isAdmin= path.includes("admin")
+    console.log("ccccisadmin",isAdmin)
 
 
 
@@ -68,6 +74,7 @@ return (
       <div className="mt-6 px-6">
         <CourseSelection
           onBatchSelect={handleBatchSelect}
+          isAdmin={isAdmin}
         />
       </div>
 
@@ -75,6 +82,7 @@ return (
       <div className="mt-6 px-6 pb-6">
         <StudentTable
           selectedBatchId={selectedBatchId}
+          isAdmin={isAdmin}
         />
       </div>
 
