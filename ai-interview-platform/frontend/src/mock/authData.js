@@ -5,7 +5,12 @@ export const dummyUsers = [
         email: "aleena@example.com",
         password: "123456",
         name: "Aleena Mathew",
-        role: "student"
+        role: "student",
+        batchId: "BATCH002",
+        placed:true ,
+        placedDate:"03-05-2026",
+        company:"TCS"
+        
     },
     {
         id: 2,
@@ -13,6 +18,107 @@ export const dummyUsers = [
         email: "john@example.com",
         password: "password123",
         name: "John Doe",
-        role: "student"
-    }
+        role: "student",
+        batchId: "BATCH003",
+        placed:true,
+        placedDate:"03-02-2026",
+        company:"EY"
+    },
+    {
+        id: 3,
+        studentId: "STU003",
+        email: "john123@example.com",
+        password: "password123",
+        name: "John Doe",
+        role: "student",
+        batchId: "BATCH001",
+        placed:false,
+        
+    },
+    {
+        id: 4,
+        studentId: "STU004",
+        email: "john88@example.com",
+        password: "password123",
+        name: "John Doe",
+        role: "student",
+        batchId: "BATCH001",
+        placed:true,
+        company:"TCS"
+
+    },
+    {
+        id: 5,
+        studentId: "STU005",
+        email: "john22@example.com",
+        password: "password123",
+        name: "John Doe",
+        role: "student",
+        batchId: "BATCH001",
+        placed:true,
+        company:"TCS"
+    },
+    {
+        id: 6,
+        studentId: "STU006",
+        email: "john66@example.com",
+        password: "password123",
+        name: "John Doe",
+        role: "student",
+        batchId: "BATCH003",
+        placed:true,
+        company:"TCS"
+    },
 ];
+
+export const Trainers=[
+    {
+        id:1,
+        employeeId: "MTR001",
+        name: "Aleena",
+        email: "ananya.sharma@offenso.com",
+        password:"1234567"
+    },
+    {
+        id:1,
+        employeeId: "MTR002",
+        name: "Midhun",
+        email: "midhun@offenso.com",
+        password:"1234567"
+    },
+    {
+        id:1,
+        employeeId: "MTR003",
+        name: "Siddharth Roy",
+        email: "siddharth.roy@offenso.com",
+        password:"1234567"
+    },
+
+]
+
+export const placementTrainers=[
+
+    {
+        id: 1,
+        mentorId: "MTR011",
+        email: "shyam@offenso.com",
+        password: "password123",
+        name: "Shyam"
+    },
+
+     {
+        id: 1,
+        mentorId: "MTR012",
+        email: "vikram@offenso.com",
+        password: "password123",
+        name: "Vikram"
+    },
+     {
+        id: 1,
+        mentorId: "MTR011",
+        email: "rahul@offenso.com",
+        password: "password123",
+        name: "Rahul"
+    },
+
+]
