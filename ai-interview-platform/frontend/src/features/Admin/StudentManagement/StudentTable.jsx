@@ -2,10 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { dummyUsers } from "../../../mock/authData";
 
-export default function StudentTable({ selectedBatchId }) {
+export default function StudentTable({ selectedBatchId,actions=[] }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
-
+  
   const location = useLocation();
 
   const studentsPerPage = 5;
@@ -152,6 +152,8 @@ export default function StudentTable({ selectedBatchId }) {
             </p>
           </div>
 
+          
+
           {/* Search */}
           <div className="relative w-full sm:w-72">
 
@@ -206,6 +208,48 @@ export default function StudentTable({ selectedBatchId }) {
             />
 
           </div>
+         
+       {/* Export button for report page */}
+
+         {
+            actions?.fullReport && (
+              <button
+                onClick={actions.fullReport}
+                className="
+                  inline-flex items-center justify-center gap-2
+                  h-10 px-4
+                  rounded-lg
+                  border border-gray-200
+                  bg-white
+                  text-sm font-medium text-gray-700
+                  shadow-sm
+                  transition-all
+                  hover:bg-gray-50
+                  hover:border-gray-300
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-emerald-100
+                "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.8"
+                  stroke="currentColor"
+                  className="w-4 h-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"
+                  />
+                </svg>
+
+                Export Full Report
+              </button>
+            )
+          }
 
         </div>
 
@@ -330,6 +374,15 @@ export default function StudentTable({ selectedBatchId }) {
                     </th>
                   )}
 
+                  {
+                    actions?.studentReport &&
+                    (
+                      <th className="px-6 py-3.5 font-semibold text-gray-600">
+                        Action
+                      </th>
+                    )
+                  }
+
                  
 
                 </tr>
@@ -432,9 +485,8 @@ export default function StudentTable({ selectedBatchId }) {
 
                         </td>
 
-                        {/* =====================================
-                            PLACEMENT STATUS
-                            ===================================== */}
+                        
+                            {/* PLACEMENT STATUS for placement page */}
                         {isPlacementPage && (
                           <td className="px-6 py-4">
 
@@ -482,6 +534,48 @@ export default function StudentTable({ selectedBatchId }) {
 
                           </td>
                         )}
+                     {/* Export button for report page */}
+                        {
+                            actions?.fullReport && (
+                              <td className="px-6 py-4">
+                              <button
+                                onClick={() => actions.studentReport(student.studentId)}
+                                className="
+                                  inline-flex items-center justify-center gap-2
+                                  h-10 px-4
+                                  rounded-lg
+                                  border border-gray-200
+                                  bg-white
+                                  text-sm font-medium text-gray-700
+                                  shadow-sm
+                                  transition-all
+                                  hover:bg-gray-50
+                                  hover:border-gray-300
+                                  focus:outline-none
+                                  focus:ring-2
+                                  focus:ring-emerald-100
+                                "
+                                >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth="1.8"
+                                  stroke="currentColor"
+                                  className="w-4 h-4"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"
+                                  />
+                                </svg>
+
+                                Export 
+                               </button>
+                               </td>
+  )
+}
 
                         
 

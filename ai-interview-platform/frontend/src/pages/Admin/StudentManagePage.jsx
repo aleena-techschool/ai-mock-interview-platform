@@ -45,7 +45,7 @@ return (
     </div>
 
     {/* Header */}
-    <div className="relative shrink-0">
+    <div className="relative shrink-0 bg-sky-50 ">
       <PageHeader
         title="Student Management"
         description="Manage students and their details"
@@ -59,7 +59,7 @@ return (
     </div>
 
     {/* Scrollable Content */}
-    <main className="flex-1 min-h-0 overflow-y-auto">
+    <main className="flex-1 min-h-0 overflow-y-auto bg-gradient-to-br from-sky-50 via-blue-50 to-white">
 
       {/* Course Summary */}
       <CourseCard />

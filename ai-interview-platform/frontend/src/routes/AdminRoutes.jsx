@@ -8,6 +8,10 @@ import MentorManagement from "../pages/Admin/MentorManagement";
 import MentorDetails from "../pages/Admin/MentorDetails";
 import PlacementManagement from "../pages/Admin/PlacementManagement";
 import PlacedStudents from "../pages/Admin/PlacedStudents";
+import ReportPage from "../pages/Admin/ReportPage";
+import StudentReport from "../pages/Admin/StudentReport";
+import MentorReport from "../pages/Admin/MentorReport";
+import PlacementReportPage from "../pages/Admin/PlacementReportPage";
 
 
 
@@ -89,6 +93,53 @@ export default function AdminRoutes() {
        {/* /admin/placement-Batch */}
       <Route
         path="/batch/:batchId"
+        element={
+          <AdminProtectedRoute>
+            <PlacedStudents />
+          </AdminProtectedRoute>
+        }
+      />
+
+
+      <Route
+        path="/reports"
+        element={
+          <AdminProtectedRoute>
+            <ReportPage />
+          </AdminProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/student-report"
+        element={
+          <AdminProtectedRoute>
+            <StudentReport />
+          </AdminProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/mentor-report"
+        element={
+          <AdminProtectedRoute>
+            <MentorReport />
+          </AdminProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/placement-report"
+        element={
+          <AdminProtectedRoute>
+            <PlacementReportPage />
+          </AdminProtectedRoute>
+        }
+      />
+
+
+      <Route
+        path="/report/:batchId"
         element={
           <AdminProtectedRoute>
             <PlacedStudents />

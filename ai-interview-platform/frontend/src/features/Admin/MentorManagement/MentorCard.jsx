@@ -1,7 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
+
+import { mentors } from "../../../mock/student management/mentorDetails";
+import { batchData} from "../../../mock/student management/batch";
+
 
 export default function MentorCard({ mentor }) {
     const navigate = useNavigate();
+    const location=useLocation()
+    
 
     const initials = mentor.name
         ?.split(" ")
@@ -11,14 +17,132 @@ export default function MentorCard({ mentor }) {
         .toUpperCase();
 
     const isActive = mentor.status === "Active";
+const isMentorManagement =
+    location.pathname === "/admin/mentor-management";
 
+    // view full details of mentor
  const handleViewDetails = () => {
     navigate(`/admin/mentor-details/${mentor.employeeId}`);
 };
 
+
+// this function is for report section to donwload the detials of the mntor
+
+const handleExport = () => {
+    const mentorId = mentor.employeeId;
+    // Get mentor details
+    const mentorData = mentors.find(
+        (m) => m.employeeId === mentorId
+    );
+    // Get active batches
+    const activeBatches = batchData.filter(
+        (b) =>
+            b.trainerId === mentorId &&
+            b.status === "Active"
+    );
+    // Get inactive batches
+    const inactiveBatches = batchData.filter(
+        (b) =>
+            b.trainerId === mentorId &&
+            b.status === "Inactive"
+    );
+    // CSV Header
+    const headers = [
+        "Mentor Name",
+        "Joined Date",
+        "Preferred Course",
+        "Batch ID",
+        "Batch Name",
+        "Batch Time",
+        "Batch Status"
+    ];
+    // Store CSV rows
+    const rows = [];
+    // Active batches
+    activeBatches.forEach((batch) => {
+        rows.push([
+            mentorData.name,
+            mentorData.joiningDate,
+            mentorData.preferredCourse,
+            batch.batchId,
+            batch.name,
+            batch.time,
+            "Active"
+        ]);
+    });
+    // Inactive batches
+    inactiveBatches.forEach((batch) => {
+        rows.push([
+            mentorData.name,
+            mentorData.joiningDate,
+            mentorData.preferredCourse,
+            batch.batchId,
+            batch.name,
+            batch.time,
+            "Inactive"
+        ]);
+
+    });
+    // If mentor has no batches
+    if (rows.length === 0) {
+        rows.push([
+            mentorData.name,
+            mentorData.joiningDate,
+            mentorData.preferredCourse,
+            "",
+            "",
+            "",
+            "No batches"
+        ]);
+    }
+    // Convert data into CSV format
+    const csvContent = [
+        headers,
+        ...rows
+    ]
+        .map((row) =>
+            row
+                .map((value) => `"${value ?? ""}"`)
+                .join(",")
+        )
+        .join("\n");
+    // Create CSV Blob
+    const blob = new Blob(
+        [csvContent],
+        {
+            type: "text/csv;charset=utf-8;"
+        }
+    );
+    // Create download URL
+    const url = URL.createObjectURL(blob);
+    // Create temporary link
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${mentorData.employeeId}_Mentor_Report.csv`;
+    document.body.appendChild(link);
+    link.click();
+    // Remove temporary link
+    document.body.removeChild(link);
+    // Release URL
+    URL.revokeObjectURL(url);
+};
+
+
+// Use the current pathname to determine whether the card is displayed
+// on the Mentor Management page or the Mentor Report page,
+// and execute handleViewDetails or handleExport accordingly.
+
+
+
+
+
+
     return (
         <div
-            onClick={handleViewDetails}
+           onClick={
+        isMentorManagement ? handleViewDetails
+            : undefined
+    }
             className="
                 group
                 cursor-pointer
@@ -137,21 +261,39 @@ export default function MentorCard({ mentor }) {
                     </span>
                 </div>
 
-                <button
-                    type="button"
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        handleViewDetails();
-                    }}
-                    className="
-                        text-xs font-medium
-                        text-emerald-600
-                        transition-colors
-                        hover:text-emerald-700
-                    "
-                >
-                    View Details →
-                </button>
+                {isMentorManagement ? (
+    <button
+        type="button"
+        onClick={(e) => {
+            e.stopPropagation();
+            handleViewDetails();
+        }}
+        className="
+            text-xs font-medium
+            text-emerald-600
+            transition-colors
+            hover:text-emerald-700
+        "
+    >
+        View Details →
+    </button>
+) : (
+    <button
+        type="button"
+        onClick={(e) => {
+            e.stopPropagation();
+            handleExport();
+        }}
+        className="
+            text-xs font-medium
+            text-blue-600
+            transition-colors
+            hover:text-blue-700
+        "
+    >
+        Export →
+    </button>
+)}
 
             </div>
 

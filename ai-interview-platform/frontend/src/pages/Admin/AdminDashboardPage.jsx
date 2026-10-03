@@ -9,7 +9,7 @@ import TodayDate from "../../features/Admin/common/TodayDate";
 
 export default function AdminDashboardPage() {
     return (
-        <div className="flex h-screen overflow-hidden">
+        <div className="flex h-screen overflow-hidden bg-gradient-to-br from-sky-50 via-blue-50 to-white">
 
             <AdminSidebar />
 

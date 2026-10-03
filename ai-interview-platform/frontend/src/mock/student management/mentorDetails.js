@@ -88,7 +88,8 @@ export const mentors = [
     address: "Jaipur, Rajasthan, India",
     designation: "React Developer",
     preferredCourse: "Frontend Development with React",
-    status:"Inactive"
+    status:"Inactive",
+    lastWorkingDate:"03-05-2025"
   },
   {
     employeeId: "MTR010",
@@ -98,7 +99,8 @@ export const mentors = [
     address: "Delhi, India",
     designation: "DevOps Engineer",
     preferredCourse: "DevOps & Cloud Engineering",
-    status:"Inactive"
+    status:"Inactive",
+    lastWorkingDate:"03-09-2025"
   },
 ];
 
@@ -130,7 +132,8 @@ export const placement=[
     phoneNumber: "+91 96789 12345",
     address: "Delhi, India",
     designation: "Placement Trainer",
-    status:"Inactive"
+    status:"Inactive",
+    lastWorkingDate:"03-05-2025"
   },
 
 
