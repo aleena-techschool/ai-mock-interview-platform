@@ -4,7 +4,7 @@ import PageHeader from "../../features/Admin/common/PageHeader"
 import TodayDate from "../../features/Admin/common/TodayDate"
 import Notification from "../../features/Admin/notifications/Notification"
 
-
+import {notificationData} from "../../features/Admin/notifications/notificationData"
 
 
 export default function NotoficationPage(){
@@ -32,7 +32,9 @@ export default function NotoficationPage(){
 
             {/* -----------------MAIN CONTENT--------------------- */}
                             <main className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden"> 
-                                <Notification /> 
+                                <Notification 
+                                notificationData={notificationData}
+                                /> 
                             </main>
                         
                         </div>

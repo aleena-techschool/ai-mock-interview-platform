@@ -6,6 +6,7 @@ import StudentInterview from "../pages/Placement/StudentInterview";
 import InterviewResultDetails from "../features/interviews/interviewHistory/InterviewResultDetails";
 import InterviewResultDetailsPage from "../pages/InterviewResultDetailsPage";
 import PlacementPage from "../pages/Placement/PlacementManagePage";
+import NotificationPage from "../pages/Placement/NotificationPage";
 
 const PlacementProtectedRoute = ({ children }) => {
   const token = useSelector((state) => state.auth.token);
@@ -84,6 +85,17 @@ export default function PlacementRoutes(){
                       </PlacementProtectedRoute>
                     }
                   />
+
+                  {/* notification */}
+                  <Route
+                    path="/notifications"
+                    element={
+                      <PlacementProtectedRoute>
+                        <NotificationPage />
+                      </PlacementProtectedRoute>
+                    }
+                  />
+
 
 
                   <Route path="*" element={<Navigate to="/placement" replace />} />

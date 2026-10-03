@@ -12,6 +12,7 @@ import InterviewResultDetailsPage from "../pages/InterviewResultDetailsPage";
 import QuestionBankPage from "../pages/QuestionBankPage";
 import ResumeAnalyzerPage from "../pages/ResumeAnalyzerPage";
 import RoadmapPage from "../pages/RoadMapPage";
+import NotificationPage from "../pages/NotificationPage";
 
 const ProtectedRoute = ({ children }) => {
   const token = useSelector((state) => state.auth.token);
@@ -110,6 +111,15 @@ export default function UserRoutes() {
         element={
           <ProtectedRoute>
             <RoadmapPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/notifications"
+        element={
+          <ProtectedRoute>
+            <NotificationPage />
           </ProtectedRoute>
         }
       />

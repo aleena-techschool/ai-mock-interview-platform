@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Bell, CheckCheck } from "lucide-react";
-import notificationData from "./notificationData";
+
 
 const filters = ["All", "Batch", "Course", "Student", "Placement"];
 
-export default function Notifications() {
+export default function Notifications({notificationData}) {
   const [notifications, setNotifications] = useState(notificationData);
   const [activeFilter, setActiveFilter] = useState("All");
 
